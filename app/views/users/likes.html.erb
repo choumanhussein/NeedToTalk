@@ -1,0 +1,74 @@
+<body class="bckg-im">
+  <header class="123">
+    <div class="en_tete">
+      <%= image_tag "header_border.png", class: 'header_border' %>
+      <%= link_to blogs_path do %>
+        <%= image_tag "insta.png", class: 'insta_logo' %>
+      <% end %>
+
+      <span class='recherche'></span>
+      <%= link_to blogs_path do %>
+      <%= image_tag "home.jpg", class: 'insta_icon' %>
+      <%end%>
+      <% if @recipient.present? %>
+       <%= link_to conversations_path(sender_id: current_user.id, recipient_id: @recipient), method: :post do %>
+      <%= image_tag "insta_messenger.jpg", class: 'insta_icon' %>
+      <% end %>
+      <% end %>
+      <%= link_to likes_user_path(current_user.id) do %>
+      <%= image_tag "heart_img.png", class: 'insta_icon' %>
+      <% end %>
+      <%= link_to user_path(current_user.id) do %>
+      <%= image_tag "user.png", class: 'insta_icon' %>
+      <% end %>
+      <%= link_to destroy_user_session_path, method: :delete,data: { confirm: 'Etes Vous Sur ?' } do %>
+      <%= image_tag "logout.png", class: 'insta_icon' %>
+      <% end %>
+      <% if current_user.admin? %>
+     <%= link_to rails_admin_path do %>
+     <%= image_tag "admin.png", class: 'insta_icon' %>
+     <% end %>
+     <% end %>
+    </div>
+  </header>
+<main>
+<h1 class="comment">Mes Favoris </h1>
+<br>
+<% @favorites.each do |favorite| %>
+<table>
+  <tr>
+    <td class="comment">Poster Par <%= link_to "#{favorite.blog.user.name}", user_path(favorite.blog.user.id) %></td>
+    <td><%= link_to 'details', blog_path(favorite.blog.id) %></td>
+  </tr>
+  <tr>
+    <td>
+      <% if favorite.blog.image.file.nil? %>
+        <% else %>
+        <%= image_tag favorite.blog.image.url %>
+      <% end %>
+    </td>
+  </tr>
+  <tr class="comment">
+    <td>
+      <%= favorite.user.created_at.try(:strftime,"%D") %>
+      <%= favorite.blog.content %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    <% @favorite = current_user.favorites.find_by(blog_id: favorite.blog.id) %>
+    <% if @favorite.present? %>
+    <%= link_to 'Supprimer', favorite_path(id: @favorite.id), method: :delete, class:"btn btn-warning" %>
+    <p class="comment">-----------------------------------------------------------------------------------------------------------------------------------------------------</p>
+      <% else %>
+    <%= link_to 'favoris', favorites_path(blog_id: favorite.blog.id), method: :post%>
+    <% end %>
+    </td>
+  </tr>
+  <br>
+</table>
+<% end %>
+<br>
+<br>
+</main>
+</body>

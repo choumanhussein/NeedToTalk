@@ -1,0 +1,92 @@
+<body class="bckg-im">
+  <header class="123">
+    <div class="en_tete">
+      <%= image_tag "header_border.png", class: 'header_border' %>
+      <%= link_to blogs_path do %>
+        <%= image_tag "insta.png", class: 'insta_logo' %>
+      <% end %>
+
+      <span class='recherche'></span>
+      <%= link_to blogs_path do %>
+      <%= image_tag "home.jpg", class: 'insta_icon' %>
+      <%end%>
+      <%= link_to likes_user_path(current_user.id) do %>
+      <%= image_tag "heart_img.png", class: 'insta_icon' %>
+      <% end %>
+      <%= link_to user_path(current_user.id) do %>
+      <%= image_tag "user.png", class: 'insta_icon' %>
+      <% end %>
+      <%= link_to destroy_user_session_path, method: :delete,data: { confirm: 'Etes Vous Sur ?' } do %>
+      <%= image_tag "logout.png", class: 'insta_icon' %>
+      <% end %>
+      <% if current_user.admin? %>
+     <%= link_to rails_admin_path do %>
+     <%= image_tag "admin.png", class: 'insta_icon' %>
+     <% end %>
+     <% end %>
+    </div>
+  </header>
+<main>
+<% if @over_ten %>
+  <%= link_to 'Previous message', '?m=all' %>
+<% end %>
+<div class="right_box">
+<h2 class="comment">Users</h2>
+<% @users.each do |user| %>
+  <% if user.id != current_user.id %>
+    <li>
+      <div class="item">
+        <%= link_to user.name, user %>
+        <%= link_to 'Message', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post %>
+      </div>
+    </li>
+  <% end %>
+<% end %>
+</div>
+<div class="left_box">
+  <div class="share_box">
+<div class="ui segment">
+  <table>
+        <tr>
+          <td>
+            <div class="main_box_head">
+  <% @messages.each do |message| %>
+    <% if message.body.present? %>
+      <div class="item">
+        <div class="content">
+          <div class="comment"><strong class="info1"><%= message.user.name %></strong> <%= message.message_time %></div>
+          <div class="list">
+            <div class="item">
+              <i class="right triangle icon"></i>
+              <div class="comment">
+              <%= message.body %> /
+              <% if message.user == current_user %>
+                <%= message.read ? 'Already read' : 'Unread' %>
+                    <% end %>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <table>
+        <td>
+        <tr>
+        <%= form_with(model: [@conversation, @message]) do |f| %>
+          <div class="field">
+            <table>
+                  <tr>
+                    <td>
+            <%= f.text_area :body, class: "form-control" %>
+          </div>
+            <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
+          <div>
+            <%= f.submit "send a message" %>
+      </div>
+    </td>
+    </tr>
+    </table>
+   </div>
+  </div>
+<% end %>

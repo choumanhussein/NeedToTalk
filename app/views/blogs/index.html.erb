@@ -1,0 +1,138 @@
+<body class="bckg-im">
+<header class="123">
+  <div class="en_tete">
+    <%= image_tag "header_border.png", class: 'header_border' %>
+    <%= link_to blogs_path do %>
+      <%= image_tag "insta.png", class: 'insta_logo' %>
+    <% end %>
+
+    <span class='recherche'></span>
+    <%= link_to blogs_path do %>
+    <%= image_tag "home.jpg", class: 'insta_icon' %>
+    <%end%>
+    <% if @recipient.present? %>
+     <%= link_to conversations_path(sender_id: current_user.id, recipient_id: @recipient), method: :post do %>
+    <%= image_tag "insta_messenger.jpg", class: 'insta_icon' %>
+    <% end %>
+    <% end %>
+    <%= link_to likes_user_path(current_user.id) do %>
+    <%= image_tag "heart_img.png", class: 'insta_icon' %>
+    <% end %>
+    <%= link_to user_path(current_user.id) do %>
+    <%= image_tag "user.png", class: 'insta_icon' %>
+    <% end %>
+    <%= link_to destroy_user_session_path, method: :delete,data: { confirm: 'Etes Vous Sur ?' } do %>
+    <%= image_tag "logout.png", class: 'insta_icon' %>
+    <% end %>
+    <% if current_user.admin? %>
+   <%= link_to rails_admin_path do %>
+   <%= image_tag "admin.png", class: 'insta_icon' %>
+   <% end %>
+   <% end %>
+  </div>
+</header>
+
+<main>
+
+  <div class="left_box">
+    <div class="share_box">
+      <%= link_to new_blog_path do %>
+      <%= image_tag "post.png", class: 'insta_icon' %>
+      <% end %>
+    </div>
+    <% @blogs.each do |blog| %>
+    <div class="main_box">
+      <table>
+        <tr>
+          <td>
+            <div class="main_box_head">
+              <% if blog.user.image.file.nil? %>
+                <%= image_tag 'no_profile_pic.png', class: 'contributer_img' %>
+                <% else %>
+                <%= image_tag blog.user.image.url, class: 'contributer_img' %>
+              <% end %>
+              <%= link_to "#{blog.user.name}", user_path(blog.user.id), class: 'contributer' %>
+              <div class="main_box_menu">
+                <%= link_to blog_path(blog.id) do %>
+                <%= image_tag "details.png", class: 'insta_icon1' %>
+                <% end %>
+                <% if current_user.id == blog.user.id %>
+                <%= link_to edit_blog_path(blog.id) do %>
+                <%= image_tag "edit.png", class: 'insta_icon1' %>
+                <% end %>
+                <%= link_to blog_path(blog.id), method: :delete ,data: { confirm: 'Voulez Vous Vraiment Supprimer ?' } do %>
+                <%= image_tag "delete.png", class: 'insta_icon1' %>
+                <% end %>
+              </div>
+            </div>
+          </td>
+          <% end %>
+        </tr>
+        <tr>
+          <td>
+          <% if blog.image.file.nil? %>
+            <% else %>
+            <%= image_tag blog.image.url, class: 'main_box_img' %>
+          <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <div class="main_box_bottom">
+            <% @favorite = current_user.favorites.find_by(blog_id: blog.id) %>
+           <% if @favorite.present? %>
+             <%= link_to favorite_path(id: @favorite.id), method: :delete do %>
+               <%= image_tag "save_on_img.png", class: 'save_img' %>
+             <% end %>
+             <% else %>
+             <%= link_to favorites_path(blog_id: blog.id), method: :post do%>
+               <%= image_tag "save_off_img.png", class: 'save_img' %>
+             <% end %>
+           <% end %>
+
+            <p class="comment1">
+              <%= link_to "#{blog.user.name}", user_path(blog.user.id), class: 'contributer' %>
+              <span>: <%= blog.content %></span>
+            </p>
+            <p class="upload_date"><%= blog.user.created_at.try(:strftime,"%D") %></p>
+          </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <br>
+    <br>
+    <% end %>
+    <br>
+    <br>
+  </div>
+
+  <div class="right_box">
+    <div class="login_user_profile">
+      <% if current_user.image.file.nil? %>
+        <%= image_tag 'no_profile_pic.png', class: 'login_user_img' %>
+      <% else %>
+        <%= image_tag current_user.image.url, class: 'login_user_img' %>
+      <% end %>
+      <div class="login_user_name">
+        <p class="contributer">
+          <%= link_to "#{current_user.name}", user_path(current_user.id), class: 'contributer' %>
+        </p>
+        <p>
+        <%= link_to "#{current_user.name}", user_path(current_user.id), class: 'login_user_name' %>
+        </p>
+        <br>
+        <br>
+        <fieldset>
+        <label class="info">[Welcome To NeedToTalk !!] <br> The place where people can share their problems and true feelings in a completely anonymous manner, place of emotional acceptance and healing !!</label>
+     <footer class="comment">
+          <p>~LS~</p>
+          <p>NeedToTalk, From Negativity Emerge Positivity ! </p>
+          <br>
+          <p>© 2022 NeedToTalk</p>
+          <br>
+          <br>
+    </footer>
+  </div>
+</main>
+</body>

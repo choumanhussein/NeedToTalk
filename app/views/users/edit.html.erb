@@ -1,0 +1,47 @@
+<body class="bckg-im">
+  <header class="123">
+    <div class="en_tete">
+      <%= image_tag "header_border.png", class: 'header_border' %>
+      <%= link_to blogs_path do %>
+        <%= image_tag "insta.png", class: 'insta_logo' %>
+      <% end %>
+
+      <span class='recherche'></span>
+      <%= link_to blogs_path do %>
+      <%= image_tag "home.jpg", class: 'insta_icon' %>
+      <%end%>
+      <% if @recipient.present? %>
+       <%= link_to conversations_path(sender_id: current_user.id, recipient_id: @recipient), method: :post do %>
+      <%= image_tag "insta_messenger.jpg", class: 'insta_icon' %>
+      <% end %>
+      <% end %>
+      <%= link_to likes_user_path(current_user.id) do %>
+      <%= image_tag "heart_img.png", class: 'insta_icon' %>
+      <% end %>
+      <%= link_to user_path(current_user.id) do %>
+      <%= image_tag "user.png", class: 'insta_icon' %>
+      <% end %>
+      <%= link_to destroy_user_session_path, method: :delete,data: { confirm: 'Etes Vous Sur ?' } do %>
+      <%= image_tag "logout.png", class: 'insta_icon' %>
+      <% end %>
+      <% if current_user.admin? %>
+     <%= link_to rails_admin_path do %>
+     <%= image_tag "admin.png", class: 'insta_icon' %>
+     <% end %>
+     <% end %>
+    </div>
+  </header>
+<main>
+<%= form_with(model: @user, local: true, url: user_path(@user.id)) do |f| %>
+  <br>
+  <p class="comment">Name:<%= @user.name %></p>
+  <br>
+  <p class="comment">Adress Email: <%= @user.email %></p>
+  <%= f.label :'Photo de profil', class:"comment" %>
+  <%= image_tag(@user.image.url) if @user.image && @user.image.url %>
+  <%= f.file_field :image %>
+  <%= f.hidden_field :image_cache %>
+  <%= f.submit "Edite", class:"btn btn-outline-warning" %>
+<% end %>
+</main>
+</body>
