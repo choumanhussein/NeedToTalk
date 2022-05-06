@@ -1,14 +1,18 @@
 class ImageUploader < CarrierWave::Uploader::Base
 
-  include CarrierWave::MiniMagick
+    include Cloudinary::CarrierWave
 
+    process :convert => 'png'
+    process :tags => ['post_picture']
 
-  storage :file
+    version :standard do
+      process :resize_to_fill => [100, 150, :north]
+    end
 
-  process :resize_to_limit => [500,500]
-
-  def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    version :thumbnail do
+      resize_to_fit(50, 50)
+    end
+    def public_id
+        return model.content
+      end
   end
-
-end

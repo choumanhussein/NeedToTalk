@@ -1,0 +1,9 @@
+production:
+  cloud_name: 'dammsjwhu'
+  api_key: '444264174632925'
+  api_secret: 'Bj_WpkI6cvq7tiLe2_C5WhvauJk'
+
+development:
+  cloud_name: 'dammsjwhu'
+  api_key: '444264174632925'
+  api_secret: 'Bj_WpkI6cvq7tiLe2_C5WhvauJk'

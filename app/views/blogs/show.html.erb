@@ -38,7 +38,7 @@
   <p>
     <% if @blog.image.file.nil? %>
       <% else %>
-      <%= image_tag @blog.image.url %>
+      <%= image_tag(@blog.image_url(:thumbnail), :alt => @blog.content) %>
       <% end %>
   </p>
   <div class="container">
