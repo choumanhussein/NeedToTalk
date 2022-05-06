@@ -5,7 +5,12 @@
         <div class="card" style="border-radius: 1rem;">
           <div class="row g-0">
             <div class="col-md-6 col-lg-5 d-none d-md-block">
+              <div class="container2">
                <%= image_tag "dark.jpg", class:"img1",style:"border-radius: 1rem;" %>
+  <div class="centered">[Welcome To NeedToTalk]<br>
+    The place where people can share their problems and true feelings in a completely anonymous manner, place of emotional acceptance and healing !! Here You Can Post and Chat about whatever you would like to in an completly anonymous manner ! Isn't that great ?
+</div>
+</div>
           </div>
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body p-4 p-lg-5 text-black">
@@ -44,7 +49,6 @@
         <%= f.submit "Log in as guest_a", class: "btn btn-warning" %>
     </div>
   <% end %>
-
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
       <%= f.hidden_field :email ,value: "guest_b@example.com" %>

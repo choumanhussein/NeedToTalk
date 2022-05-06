@@ -428,7 +428,7 @@ li{
 
 .img1{
   height: 100%;
-  width: 350px;
+  width:100%;
 }
 
 .info{
@@ -452,4 +452,18 @@ li{
  -webkit-text-fill-color: transparent;
   height:100% auto;
   width:auto;
+}
+
+.container2 {
+  position: relative;
+  text-align: center;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  color:white;
 }
