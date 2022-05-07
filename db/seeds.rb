@@ -99,7 +99,7 @@ Blog.create!(
 )
 Blog.create!(
   user_id: user2.id,
-  Content:"Hello There !",
+  content:"Hello There !",
 )
 Blog.create!(
   user_id: user1.id,
