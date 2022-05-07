@@ -7,11 +7,11 @@
         <div class="comment-content" id ="this_comment_<%= comment.id%>"</div>
         <p class="comment"><%= comment.content %><% if current_user.id == comment.user_id %>
         <%= link_to edit_blog_comment_path(blog, comment), remote: true do %>
-        <%= image_tag "edit_comment.png", class: 'insta_icon1' %>
+        <%= image_tag "edit_comment.png", class: 'insta_icon1', id:'edit1' %>
         <% end %>
         <%= link_to blog_comment_path(comment.blog_id, comment.id), method: :delete, remote: true,
                                           data: { confirm: "Do you really want to delete this?"} do %>
-        <%= image_tag "delete.png", class: 'insta_icon1' %>
+        <%= image_tag "delete.png", class: 'insta_icon1', id:'delete1' %>
         <% end %>
         <% elsif current_user.id == blog.user.id && current_user.id != comment.user_id %>
         <%= link_to blog_comment_path(comment.blog_id, comment.id), method: :delete, remote: true,

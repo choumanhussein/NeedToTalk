@@ -13,7 +13,7 @@ end
           it 'should register new user' do
           visit '/'
           click_on 'Sign up'
-          fill_in 'Email', with: 'huss@example.com'
+          fill_in 'user[email]', with: 'huss@example.com'
           fill_in 'Password', with: 'password'
           fill_in 'Password confirmation', with: 'password'
           click_on 'Sign up'

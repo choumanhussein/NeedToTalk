@@ -12,7 +12,7 @@
     <%end%>
     <% if @recipient.present? %>
      <%= link_to conversations_path(sender_id: current_user.id, recipient_id: @recipient), method: :post do %>
-    <%= image_tag "insta_messenger.jpg", class: 'insta_icon' %>
+    <%= image_tag "insta_messenger.jpg", class: 'insta_icon2' %>
     <% end %>
     <% end %>
     <%= link_to likes_user_path(current_user.id) do %>
@@ -54,14 +54,14 @@
               <%= link_to "#{blog.user.name}", user_path(blog.user.id), class: 'contributer' %>
               <div class="main_box_menu">
                 <%= link_to blog_path(blog.id) do %>
-                <%= image_tag "details.png", class: 'insta_icon1' %>
+                <%= image_tag "details.png", class: 'insta_icon1', id:'details' %>
                 <% end %>
                 <% if current_user.id == blog.user.id %>
                 <%= link_to edit_blog_path(blog.id) do %>
-                <%= image_tag "edit.png", class: 'insta_icon1' %>
+                <%= image_tag "edit.png", class: 'insta_icon1', id:'edit' %>
                 <% end %>
                 <%= link_to blog_path(blog.id), method: :delete ,data: { confirm: 'Voulez Vous Vraiment Supprimer ?' } do %>
-                <%= image_tag "delete.png", class: 'insta_icon1' %>
+                <%= image_tag "delete.png", class: 'insta_icon1', id:'delete' %>
                 <% end %>
               </div>
             </div>

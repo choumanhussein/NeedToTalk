@@ -1,7 +1,7 @@
 require 'rails_helper'
 RSpec.describe 'Blog management function', type: :system do
   before do
-    FactoryBot.create(:user, name: 'bella',
+  user2 =  FactoryBot.create(:user, name: 'bella',
                              email: 'bella@gmail.com',
                              password: 'password',
                              password_confirmation: 'password')
@@ -9,6 +9,11 @@ RSpec.describe 'Blog management function', type: :system do
     fill_in 'Email', with: 'bella@gmail.com'
     fill_in 'Password', with: 'password'
     click_button 'Log in'
+
+    Blog.create!(
+      user_id: user2.id,
+      content:"Hello There !",
+    )
   end
   describe 'New creation function' do
     context 'When creating a new post' do
@@ -31,11 +36,34 @@ RSpec.describe 'Blog management function', type: :system do
 
   describe 'Detailed display function' do
      context 'When transitioned to any Blog details screen' do
-       it 'The content of the relevant Blog is displayed' do
+       it 'Able To Read Content' do
          visit new_blog_path
           fill_in "Commenter", with: 'title test'
           click_button 'Poster'
         expect(page).to have_content 'title test'
+       end
+     end
+  end
+  describe 'Detailed display function' do
+     context 'When transitioned to any Blog details screen' do
+       it 'Able To Edit Content' do
+       visit '/'
+          find("#details").click
+          find("#edit").click
+          fill_in "Commenter", with: 'Hello123'
+          click_button 'Poster'
+        expect(page).to have_content 'Hello123'
+       end
+     end
+  end
+  describe 'Detailed display function' do
+     context 'When transitioned to The Blog details screen' do
+       it 'Able To Delete Content' do
+       visit '/'
+       accept_alert do
+           find("#delete").click
+        end
+        expect(page).to have_content '2022 NeedToTalk'
        end
      end
   end
