@@ -21,7 +21,7 @@
       <%= link_to user_path(current_user.id) do %>
       <%= image_tag "user.png", class: 'insta_icon' %>
       <% end %>
-      <%= link_to destroy_user_session_path, method: :delete,data: { confirm: 'Etes Vous Sur ?' } do %>
+      <%= link_to destroy_user_session_path, method: :delete,data: { confirm: 'Are You Sure ?' } do %>
       <%= image_tag "logout.png", class: 'insta_icon' %>
       <% end %>
       <% if current_user.admin? %>

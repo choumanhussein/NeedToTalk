@@ -33,7 +33,7 @@
   </header>
 
 <main>
-<h3 class= "comment">Confirmer ?</h3>
+<h3 class= "comment">Confirm ?</h3>
 <%= form_with(model: @blog, url: blogs_path, local: true) do |form| %>
   <%= form.hidden_field :content %>
   <p class="comment"><%= @blog.content %></p>
@@ -41,10 +41,10 @@
   <%= form.hidden_field :image_cache %>
   <br>
   <br>
-  <%= form.submit "Poster" %>
+  <%= form.submit "Submit" %>
   <br>
   <br>
-  <%= form.submit "Non", name: 'Non'%>
+  <%= form.submit "Back", name: 'Back'%>
 <% end %>
 </main>
 </body>

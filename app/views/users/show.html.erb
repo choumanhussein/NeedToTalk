@@ -21,7 +21,7 @@
       <%= link_to user_path(current_user.id) do %>
       <%= image_tag "user.png", class: 'insta_icon' %>
       <% end %>
-      <%= link_to destroy_user_session_path, method: :delete,data: { confirm: 'Etes Vous Sur ?' } do %>
+      <%= link_to destroy_user_session_path, method: :delete,data: { confirm: 'Are You Sure ?' } do %>
       <%= image_tag "logout.png", class: 'insta_icon' %>
       <% end %>
       <% if current_user.admin? %>
@@ -33,9 +33,9 @@
   </header>
 
 <main>
-  <h1 class="comment">Page de Profil de <%= @user.name %></h1>
+  <h1 class="comment"><%= @user.name %>'s Profile Page</h1>
   <% if current_user.id == @user.id %>
-    <p><%= link_to "Edite", edit_user_path(@user.id), class:"btn btn-warning" %></p>
+    <p><%= link_to "Edit", edit_user_path(@user.id), class:"btn btn-warning" %></p>
   <% end %>
   <% if @user.image.file.nil? %>
     <%= image_tag 'no_profile_pic_big.png', class: 'profile_img' %>
@@ -47,7 +47,7 @@
   <br>
 
   <% if current_user.id == @user.id %>
-  <%= link_to "Postes Favoris", likes_user_path(current_user.id),  class:"btn btn-danger" %>
+  <%= link_to "Favorite poste", likes_user_path(current_user.id),  class:"btn btn-danger" %>
     <%= link_to 'Message', conversations_path(sender_id: current_user.id, recipient_id: @user.id), method: :post %>
 
     <br>

@@ -21,7 +21,7 @@
       <%= link_to user_path(current_user.id) do %>
       <%= image_tag "user.png", class: 'insta_icon' %>
       <% end %>
-      <%= link_to destroy_user_session_path, method: :delete,data: { confirm: 'Etes Vous Sur ?' } do %>
+      <%= link_to destroy_user_session_path, method: :delete,data: { confirm: 'Are You Sure ?' } do %>
       <%= image_tag "logout.png", class: 'insta_icon' %>
       <% end %>
       <% if current_user.admin? %>
@@ -36,7 +36,7 @@
   <br>
   <p class="comment">Name:<%= @user.name %></p>
   <br>
-  <p class="comment">Adress Email: <%= @user.email %></p>
+  <p class="comment">Email Adress: <%= @user.email %></p>
   <%= f.label :'Photo de profil', class:"comment" %>
   <%= image_tag(@user.image.url) if @user.image && @user.image.url %>
   <%= f.file_field :image %>

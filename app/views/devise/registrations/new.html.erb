@@ -14,7 +14,7 @@
 
   <div class="comment">
     <%= f.label :email %><br/>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder:"Example@gmail.com" %>
   </div>
 
   <div class="comment">
@@ -22,12 +22,12 @@
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password",placeholder:"Must Have At Least 6 characters" %>
   </div>
 
   <div class="comment">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password",placeholder:"password_confirmation" %>
   </div>
 
   <div class="actions">
