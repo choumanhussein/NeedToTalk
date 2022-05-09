@@ -37,7 +37,7 @@
 <% @favorites.each do |favorite| %>
 <table>
   <tr>
-    <td class="comment">Poster Par <%= link_to "#{favorite.blog.user.name}", user_path(favorite.blog.user.id) %></td>
+    <td class="comment">Post Of<%= link_to "#{favorite.blog.user.name}", user_path(favorite.blog.user.id) %></td>
     <td><%= link_to 'details', blog_path(favorite.blog.id) %></td>
   </tr>
   <tr>
